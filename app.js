@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const router = require("./routes/todo.route");
+const connectDB = require("./mongoose/connectDB");
 
 const app = express();
 
@@ -11,7 +12,9 @@ app.set( "view engine", "ejs");
 app.use("/", router)
 
 
+connectDB();
+const PORT = process.env.PORT || 3000;
 
+app.listen(PORT, ()=> console.log(`server listening at port ${PORT}`));
 
-
-app.listen(process.env.PORT, ()=> console.log(`server listening at port ${process.env.PORT}`))
+module.exports = app;
